@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-dataset = pd.read_csv(r'C:\Users\\RAJA\\Downloads\\transaction_data.csv')
+dataset = pd.read_csv(r'transaction_data.csv')
 st.title("Transaction Data Viewer")
 st.dataframe(dataset)
 
