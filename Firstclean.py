@@ -5,7 +5,7 @@ import streamlit as st
 st.set_page_config(page_title="Transaction Data Viewer", layout="wide")
 
 # Load Dataset
-dataset = pd.read_csv(r'C:\Users\\RAJA\\Downloads\\transaction_data.csv')
+dataset = pd.read_csv(r'transaction_data.csv')
 
 # Sidebar - Filters
 st.sidebar.header("Filters")
