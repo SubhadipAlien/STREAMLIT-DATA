@@ -1,6 +1,5 @@
 import pandas as pd
 import streamlit as st
-import plotly.express as px
 import time  
 
 # Page Configuration
@@ -8,14 +7,6 @@ st.set_page_config(page_title="Transaction Data Viewer", layout="wide")
 
 # Load Dataset
 dataset = pd.read_csv(r'transaction_data.csv')
-
-# **Compute Highest Spenders Globally (before selecting tabs)**
-highest_spenders = (
-    dataset.groupby("customer_id")["amount"]
-    .sum()
-    .reset_index()
-    .sort_values(by="amount", ascending=False)
-)
 
 # **Custom Tab Selection Using Radio Buttons**
 selected_tab = st.sidebar.radio("Choose a Section", ["📋 Data Validation", "📊 Data Visualization"])
@@ -37,6 +28,14 @@ if selected_tab == "📋 Data Validation":
         st.dataframe(dataset, use_container_width=True)
     else:
         st.dataframe(dataset[dataset["customer_id"] == selected_customer], use_container_width=True)
+
+    # Compute Highest Spenders
+    highest_spenders = (
+        dataset.groupby("customer_id")["amount"]
+        .sum()
+        .reset_index()
+        .sort_values(by="amount", ascending=False)
+    )
 
     # Animated Loading for Highest Spenders
     st.subheader("💰 Highest Spenders")
@@ -61,19 +60,7 @@ if selected_tab == "📋 Data Validation":
 # **Tab 2: Data Visualization**
 if selected_tab == "📊 Data Visualization":
     st.title("📊 Data Visualization")
-    
-        # Bar Chart: Highest Spenders
-    st.subheader("📊 Top Spenders")
-    fig_bar = px.bar(highest_spenders.head(10), x='customer_id', y='amount', 
-                     title="Top 10 Highest Spenders", labels={'customer_id': 'Customer ID', 'amount': 'Total Amount Spent'})
-    st.plotly_chart(fig_bar, use_container_width=True)
-
-    # Pie Chart: Spending Distribution
-    st.subheader("🎉 Spending Distribution")
-    fig_pie = px.pie(highest_spenders, values='amount', names='customer_id', title="Spending Distribution by Customer")
-    st.plotly_chart(fig_pie, use_container_width=True)
-    
-    st.write("🔍 No More visualizations yet! This section is under development. 🚧")
+    st.write("🔍 No visualizations yet! This section is under development. 🚧")
 
 # **Animated Footer**
 st.markdown(
