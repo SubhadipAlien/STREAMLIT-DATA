@@ -1,13 +1,12 @@
 import pandas as pd
 import streamlit as st
-import plotly.express as px
 import time  
 
 # Page Configuration
 st.set_page_config(page_title="Transaction Data Viewer", layout="wide")
 
 # Load Dataset
-dataset = pd.read_csv(r'transaction_data.csv')
+dataset = pd.read_csv(r'C:\Users\\RAJA\\Downloads\\transaction_data.csv')
 
 # **Custom Tab Selection Using Radio Buttons**
 selected_tab = st.sidebar.radio("Choose a Section", ["📋 Data Validation", "📊 Data Visualization"])
@@ -24,7 +23,7 @@ if selected_tab == "📋 Data Validation":
     st.title("📋 Data Validation")
 
     # Show Dataset
-    st.subheader("📝 Full Transaction Dataset")
+    st.subheader("📜 Full Transaction Dataset")
     if selected_customer == "All":
         st.dataframe(dataset, use_container_width=True)
     else:
@@ -61,19 +60,7 @@ if selected_tab == "📋 Data Validation":
 # **Tab 2: Data Visualization**
 if selected_tab == "📊 Data Visualization":
     st.title("📊 Data Visualization")
-    
-    # Bar Chart: Highest Spenders
-    st.subheader("📊 Top Spenders")
-    fig_bar = px.bar(highest_spenders.head(10), x='customer_id', y='amount', title="Top 10 Highest Spenders", labels={'customer_id': 'Customer ID', 'amount': 'Total Amount Spent'})
-    st.plotly_chart(fig_bar, use_container_width=True)
-    
-    # Pie Chart: Spending Distribution
-    st.subheader("🎈 Spending Distribution")
-    fig_pie = px.pie(highest_spenders, values='amount', names='customer_id', title="Spending Distribution by Customer")
-    st.plotly_chart(fig_pie, use_container_width=True)
-    
-    # Placeholder for Future Visualizations
-    st.write("🔍 More visualizations will be added soon!")
+    st.write("🔍 No visualizations yet! This section is under development. 🚧")
 
 # **Animated Footer**
 st.markdown(
