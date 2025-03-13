@@ -82,3 +82,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# chart is not working
